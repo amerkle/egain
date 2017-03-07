@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import org.json.JSONObject;
 
 import com.amerkle.egain.database.Database;
-import com.amerkle.egain.scraper.guid.GuidScraper;
+import com.amerkle.egain.parent.Configuration;
 
 public class AppartmentScraperRunnable implements Runnable {
 	private String guid = null;
@@ -44,7 +44,7 @@ public class AppartmentScraperRunnable implements Runnable {
 			String urlParameters = "guid=" + guid;
 			byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
 			int postDataLength = postData.length;
-			URL url = new URL(GuidScraper.CHECK_INSTALLED_URL);
+			URL url = new URL(Configuration.getCheckInstalledUrl());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setInstanceFollowRedirects(false);

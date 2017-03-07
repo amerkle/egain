@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.amerkle.egain.database.Database;
+import com.amerkle.egain.parent.Configuration;
 
 public class MeasurementScraper {
-	private static int days = 60;
 
 	public static void main(String[] args) {
 		Database.Measurement.drop();
@@ -26,7 +26,7 @@ public class MeasurementScraper {
 				String guid = resultSet.getString("guid");
 				MeasurementScraperRunnable runner = new MeasurementScraperRunnable();
 				runner.setGuid(guid);
-				runner.setDays(days);
+				runner.setDays(Configuration.getDays());
 				Thread thread = new Thread(runner);
 				thread.start();
 			}

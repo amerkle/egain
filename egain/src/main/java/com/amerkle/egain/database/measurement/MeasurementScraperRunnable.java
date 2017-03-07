@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.amerkle.egain.database.Database;
-import com.amerkle.egain.scraper.guid.GuidScraper;
+import com.amerkle.egain.parent.Configuration;
 
 public class MeasurementScraperRunnable implements Runnable {
 	private static final String PATTERN = "\\{\"Temp\":([0-9\\.]+),\"Hum\":([0-9\\.]+),\"Date\":\"([0-9\\- :]+)\"\\}";
@@ -80,7 +80,7 @@ public class MeasurementScraperRunnable implements Runnable {
 			String urlParameters = "guid=" + getGuid() + "&daysAgo=" + getDays();
 			byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
 			int postDataLength = postData.length;
-			URL url = new URL(GuidScraper.LIST_SENSOR_VALUES_URL);
+			URL url = new URL(Configuration.getListSensorValuesUrl());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setInstanceFollowRedirects(false);

@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
+import com.amerkle.egain.parent.Configuration;
+
 public class GuidScraperRunnable implements Runnable {
 	private int id;
 
@@ -47,7 +49,7 @@ public class GuidScraperRunnable implements Runnable {
 	private String loadFile(int id) {
 		URLConnection con;
 		try {
-			con = new URL(GuidScraper.BASE_URL + id).openConnection();
+			con = new URL(Configuration.getBaseUrl() + id).openConnection();
 			con.connect();
 			con.getInputStream();
 			return con.getURL().toString().split("gid=")[1];
@@ -61,7 +63,7 @@ public class GuidScraperRunnable implements Runnable {
 			String urlParameters = "guid=" + guid;
 			byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
 			int postDataLength = postData.length;
-			URL url = new URL(GuidScraper.CHECK_INSTALLED_URL);
+			URL url = new URL(Configuration.getCheckInstalledUrl());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setInstanceFollowRedirects(false);
